@@ -1,0 +1,6 @@
+streamlit-aggrid
+numpy
+pandas
+streamlit
+altair
+datetime
