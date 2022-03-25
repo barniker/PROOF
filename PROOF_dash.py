@@ -69,12 +69,12 @@ def compute_diff(col_in,col_name_out,p_new_clean,p_old_clean):
     return p_cat
 
 @st.cache(allow_output_mutation=True)
-def build_data():
+def build_data(new,old):
 
 	# Read data
 	# TODO(rbarniker): Move to wgmi API
-	p_new=pd.read_csv('Data/PROOF_031222.csv',thousands=r',')
-	p_old=pd.read_csv('Data/PROOF_020722.csv',thousands=r',')
+	p_new=pd.read_csv('Data/PROOF_%s.csv'%new,thousands=r',')
+	p_old=pd.read_csv('Data/PROOF_%s.csv'%old,thousands=r',')
 
 	# Clean
 	p_new_clean=clean_data(p_new)
@@ -93,6 +93,7 @@ def build_data():
 	summary_table=summary_table[show_cols]
 	new_cols=['PROOF Holders','% Chg Holders','Floor','% Chg Floor','% PROOF Holding']
 	summary_table.columns=new_cols
+	summary_table.replace(np.inf, 0, inplace=True)
 	return summary_table
 
 # Format table columns 
@@ -146,20 +147,20 @@ def color_col(gb,col,table_view):
                         cellStyle=cellsytle_jscode)
 
 # Build table 
-summary_table=build_data()
+new='032322'
+old='031222'
+summary_table=build_data(new,old)
 
 # Header 
 st.title("PROOF Collective NFT Ownership")
-d_new='03-12-20022'
-d_old='02-22-20022'
-st.info("Data from wgmi.io. Dashboard by @rbarniker. Comparing %s to %s"%(d_new,d_old))
+st.info("Data from wgmi.io. Dashboard by @rbarniker. Comparing %s to %s"%(new,old))
 
 # Filters
 col1,col2 = st.columns(2) 
 
 with col1:
 
-	price = st.slider('Min current price (ETH)', min_value=0.1, max_value=50.0,value=1.0)
+	price = st.slider('Min current price (ETH)', min_value=0.1, max_value=10.0,value=1.0)
 	table_view = summary_table[summary_table['Floor'] >= price] 
 
 with col2:
