@@ -147,8 +147,8 @@ def color_col(gb,col,table_view):
                         cellStyle=cellsytle_jscode)
 
 # Build table 
-new='040122'
-old='031222'
+new='041222'
+old='040122'
 summary_table=build_data(new,old)
 
 # Header 
