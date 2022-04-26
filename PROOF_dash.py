@@ -16,6 +16,7 @@ from st_aggrid.grid_options_builder import GridOptionsBuilder
 
 # Blacklisted from analysis
 blacklist=['Rarible',
+           'The Misfits Ape Society Col', # Airdrop to all MB
            '#NAME?',
            'PROOF Collective']
 
@@ -147,8 +148,8 @@ def color_col(gb,col,table_view):
                         cellStyle=cellsytle_jscode)
 
 # Build table 
-new='041222'
-old='040122'
+new='042522'
+old='041822'
 summary_table=build_data(new,old)
 
 # Header 
