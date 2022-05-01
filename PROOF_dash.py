@@ -161,7 +161,7 @@ col1,col2 = st.columns(2)
 
 with col1:
 
-	price = st.slider('Min current price (ETH)', min_value=0.1, max_value=10.0,value=1.0)
+	price = st.slider('Min current price (ETH)', min_value=0.01, max_value=10.0,value=1.0)
 	table_view = summary_table[summary_table['Floor'] >= price] 
 
 with col2:
